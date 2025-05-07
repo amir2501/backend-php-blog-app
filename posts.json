@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "title": "Welcome to the Blog",
+    "body": "This is the first post on this minimal blog. Stay tuned for more updates!"
+  },
+  {
+    "id": 2,
+    "title": "React Native + PHP API",
+    "body": "Combining React Native frontend with a simple PHP backend is a great way to learn full-stack development."
+  },
+  {
+    "id": 3,
+    "title": "Design Tips",
+    "body": "Keep your UI clean, spacing consistent, and typography readable. Less is more!"
+  },
+  {
+    "id": 4,
+    "title": "Why JSON is Awesome",
+    "body": "JSON is lightweight, human-readable, and works great for storing structured data like blog posts."
+  },
+  {
+    "id": 5,
+    "title": "Next Steps",
+    "body": "Try adding edit/delete functionality, search, or user authentication to enhance your blog app."
+  }
+]
