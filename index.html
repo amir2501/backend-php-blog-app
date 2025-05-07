@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog App</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f7f7f7; }
+        .form-container, .post-card { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
+        .post-card h3 { margin: 0 0 10px; }
+        .post-card p { font-size: 16px; color: #555; }
+        input, textarea, button { width: 100%; padding: 10px; margin-bottom: 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+
+<h1>My Blog</h1>
+
+<div class="form-container">
+    <h2>Create a Post</h2>
+    <form id="postForm">
+        <input type="text" id="title" placeholder="Post Title" required />
+        <textarea id="body" placeholder="Post Content" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<h2>All Posts</h2>
+<div id="posts"></div>
+
+<script>
+    const postsUrl = 'posts.json'; // Path to your mock JSON file
+
+    // Fetch posts from the JSON file
+    function loadPosts() {
+        fetch(postsUrl)
+            .then(response => response.json())
+            .then(posts => {
+                const postsDiv = document.getElementById('posts');
+                postsDiv.innerHTML = ''; // Clear existing posts
+                posts.forEach(post => {
+                    const postCard = document.createElement('div');
+                    postCard.classList.add('post-card');
+                    postCard.innerHTML = `
+                            <h3>${post.title}</h3>
+                            <p>${post.body}</p>
+                        `;
+                    postsDiv.appendChild(postCard);
+                });
+            });
+    }
+
+    // Handle form submission and add new post
+    document.getElementById('postForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const title = document.getElementById('title').value;
+        const body = document.getElementById('body').value;
+
+        // Create a new post object (id will be generated as posts.length + 1 for simplicity)
+        const newPost = {
+            id: Date.now(), // You can use this to simulate unique ID
+            title: title,
+            body: body
+        };
+
+        // Add new post to the local posts array (for now, simulate adding to JSON)
+        fetch(postsUrl)
+            .then(response => response.json())
+            .then(posts => {
+                posts.push(newPost); // Add new post to the posts array
+                // Normally, you'd save this back to a server or local storage
+                // But for GitHub Pages, it's just static
+                loadPosts(); // Reload posts after submitting
+            });
+    });
+
+    // Initialize the page with posts
+    loadPosts();
+</script>
+
+</body>
+</html>
